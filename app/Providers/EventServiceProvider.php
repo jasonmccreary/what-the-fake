@@ -16,9 +16,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        //        PostCreated::class => [
-        //            PrepareNewPost::class,
-        //        ],
+        PostCreated::class => [
+            PrepareNewPost::class,
+        ],
 
         Registered::class => [
             SendEmailVerificationNotification::class,

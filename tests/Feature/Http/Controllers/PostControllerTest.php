@@ -23,7 +23,7 @@ class PostControllerTest extends TestCase
      */
     public function index_displays_posts(): void
     {
-        $posts = Post::factory()->count(3)->create();
+        $posts = Post::factory()->count(3)->createQuietly();
 
         $response = $this->get(route('post.index'));
 
@@ -87,7 +87,7 @@ class PostControllerTest extends TestCase
      */
     public function show_displays_view(): void
     {
-        $post = Post::factory()->create();
+        $post = Post::factory()->createQuietly();
 
         $response = $this->get(route('post.show', $post));
 

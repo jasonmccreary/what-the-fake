@@ -18,9 +18,9 @@ class PublishPostTest extends TestCase
      */
     public function it_updates_the_post_and_notifies_the_system(): void
     {
-        $post = Post::factory()->create();
-
         Event::fake();
+
+        $post = Post::factory()->create();
 
         PublishPost::dispatch($post);
 

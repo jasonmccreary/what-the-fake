@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePost;
 use App\Http\Requests\UpdatePostRequest;
-use App\Jobs\ReviewPost;
-use App\Mail\NewPost;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class PostController extends Controller
@@ -28,11 +25,6 @@ class PostController extends Controller
     public function store(StorePost $request): RedirectResponse
     {
         $post = Post::create($request->safe()->all());
-
-        Mail::to(config('settings.admin_email'))
-            ->queue(new NewPost($post));
-
-        ReviewPost::dispatch($post);
 
         return redirect()->route('post.show', $post);
     }

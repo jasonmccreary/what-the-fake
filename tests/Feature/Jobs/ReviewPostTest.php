@@ -18,7 +18,7 @@ class ReviewPostTest extends TestCase
      */
     public function it_publishes_the_post(): void
     {
-        $post = Post::factory()->create();
+        $post = Post::factory()->createQuietly();
 
         Bus::fake()->except(ReviewPost::class);
 
@@ -39,7 +39,7 @@ class ReviewPostTest extends TestCase
      */
     public function it_deletes_the_post_with_profanity(): void
     {
-        $post = Post::factory()->create(['body' => 'facades suck!']);
+        $post = Post::factory()->createQuietly(['body' => 'facades suck!']);
 
         Bus::fake()->except(ReviewPost::class);
 
