@@ -12,11 +12,10 @@ class LanguageAI
             return false;
         }
 
-        return true;
-        //        $response = Http::post('https://api.language.ai/v1/analyze', [
-        //            'text' => $body,
-        //        ]);
-        //
-        //        return $response->successful();
+        $response = Http::post('https://api.language.ai/v1/analyze', [
+            'text' => $body,
+        ]);
+
+        return $response->successful();
     }
 }
