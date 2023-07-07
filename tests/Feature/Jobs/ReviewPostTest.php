@@ -5,6 +5,7 @@ namespace Tests\Feature\Jobs;
 use App\Jobs\PublishPost;
 use App\Jobs\ReviewPost;
 use App\Models\Post;
+use Facades\App\Support\LanguageAI;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
 use Tests\TestCase;
@@ -21,6 +22,8 @@ class ReviewPostTest extends TestCase
         $post = Post::factory()->createQuietly();
 
         Bus::fake()->except(ReviewPost::class);
+
+        LanguageAI::expects('analyze')->with($post->body)->andReturnTrue();
 
         ReviewPost::dispatch($post);
 

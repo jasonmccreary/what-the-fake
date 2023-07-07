@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\Post;
-use App\Support\LanguageAI;
+use Facades\App\Support\LanguageAI;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -21,9 +21,9 @@ class ReviewPost implements ShouldQueue
         $this->post = $post;
     }
 
-    public function handle(LanguageAI $languageAI): void
+    public function handle(): void
     {
-        $passes = $languageAI->analyze($this->post->body);
+        $passes = LanguageAI::analyze($this->post->body);
 
         if (! $passes) {
             $this->post->delete();
